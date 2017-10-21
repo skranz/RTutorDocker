@@ -8,6 +8,7 @@ install.rtutor.ps = function(user, pkg, base.dir="/home/rtutor/ps") {
   info = eval(substitute(pkg::ps.pkg.info(), list(pkg=as.name(pkg))))
   dir = file.path(base.dir,pkg)
   try(dir.create(dir, recursive=TRUE))
+  library(pkg, character.only=TRUE)
   deploy.ps(ps.name=info$ps[1],dir = dir,info=info, ask.user=FALSE)
   
   # Create run.R script
@@ -31,4 +32,4 @@ run.ps(user.name="Jon Doe", package="',pkg,'", sample.solution=FALSE)
   file.copy(files, dir)
 }
 
-install.rtutor.ps("Fcolli",pkg="RTutorProcurementAuction")
+try(install.rtutor.ps("Fcolli",pkg="RTutorProcurementAuction"))

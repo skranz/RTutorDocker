@@ -50,6 +50,7 @@ from.github = function(pkg, lib = path, ref="master", overwrite = glob.overwrite
 #from.cran("curl")
 
 from.github(lib=path,"skranz/RTutor",ref = "master")
+from.github(lib=path,"skranz/regtools",ref = "master")
 
 cat("\n\nFailed installations:\n")
 print(failed)

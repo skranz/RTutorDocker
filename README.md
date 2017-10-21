@@ -17,7 +17,7 @@ Adapt the URL if you run the container on your webserver. You can map the RStudi
 
 When you start the RStudio server, you will find in the file pane under `/home/rtutor/ps` the example problem sets that are contained in the container. If you go to a problem set folder, open the file `run.R` and source all code to start the problem set. You can also take a look at the source code of the problem set, by opening the `<problemsetname>_sol.Rmd` file. 
 
-The example problemsets can be found in the directory `/home/rtutor/ps` inside your container. You can install additional problem sets simply by entering the installation commands described on the Github sites of the problem sets in your RStudio server instance. 
+You can install additional problem sets simply by entering the installation commands described on the Github sites of the problem sets in your RStudio server instance. 
 
 If you want to create your own problem sets, it makes sense to mount a directory of your host computer to the docker container. Simple use the `-v` parameter in your docker RUN command. For example
 
