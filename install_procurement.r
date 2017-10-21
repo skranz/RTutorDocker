@@ -3,6 +3,7 @@ install.rtutor.ps = function(user, pkg, base.dir="/home/rtutor/ps") {
   # Install package
   devtools::install_github(paste0(user,"/", pkg), upgrade_dependencies = FALSE)
   
+  library(RTutor)
   # Deploy ps
   info = eval(substitute(pkg::ps.pkg.info(), list(pkg=as.name(pkg))))
   dir = file.path(base.dir,pkg)
