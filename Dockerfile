@@ -12,4 +12,5 @@ RUN Rscript /tmp/install2.r
 
 # Copy example problem sets from
 # from RTutorDocker repository
-COPY ps/* /home/rtutor/ps/
+COPY ps/Intro/* /home/rtutor/ps/Intro
+COPY ps/Example/* /home/rtutor/ps/Example
