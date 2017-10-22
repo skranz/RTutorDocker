@@ -1,0 +1,187 @@
+# Problemset Example
+Example of some features of an RTutor interactive Problemset
+Author:  Sebastian Kranz
+
+#< ignore
+```{r "create_ps"}
+# Run all code in this chunk to create and show
+# the problem set
+
+library(RTutor)
+library(yaml)
+# set to TRUE to facilitate error detection
+restore.point.options(display.restore.point=FALSE)
+
+# Adapt to your working directory 
+setwd("/home/rtutor/ps/Example")
+
+# Specify problem set name
+ps.name = "Example"
+sol.file = paste0(ps.name,"_sol.Rmd")
+
+# character vector of all packages you load in the problem set
+libs = c("leaflet") 
+
+# Compile the problem set
+create.ps(sol.file=sol.file, ps.name=ps.name, user.name=NULL,libs=libs, stop.when.finished=FALSE, addons="quiz")
+
+# Show problem set in browser
+show.shiny.ps(ps.name, sample.solution=FALSE, launch.browser=TRUE)
+stop.without.error()
+```
+#>
+
+## Exercise 1 -- Summary statistics
+
+We often want to compute some summary statistic of a vector.
+For example computing the sum $\sum_{i=1}^n x_i$ of a vector x:
+
+```{r "1 a)",fig.height=3}
+#< task
+x = 10:20
+# Computing the sum of x
+sum(x)
+#>
+```
+
+
+Now compute the mean of x.
+```{r "1 a) 2"}
+mean(x)
+#< hint
+cat("There already exist R functions for many things. To find them use Google, e.g. search for 'R compute mean'.")
+#>
+```
+
+#< award "mean means mean"
+Well, in some occasions one can just guess the name of an R function. The function to compute the mean of a vector, or matrix is called 'mean'. Usually, it is much quicker to goggle than to guess function names, however.
+#>
+
+#< info "useful functions for numeric vectors"
+Here are examples for useful R functions
+```{r "1 "}
+max(c(1,5,2)) # returns maximum
+min(c(1,5,2)) # returns minimum
+
+sum(c(1,5,2,NA), na.rm=TRUE) # returns sum of all numbers, ignore NA
+cumsum(c(1,5,2)) # returns cummulated sum
+diff(c(1,5,2)) # returns the vector of differences
+```
+#>
+
+
+
+## Exercise 2 -- Quiz
+
+### A single choice quiz
+
+#< quiz "single"
+question: What is 20*20?
+sc:
+    - 100
+    - 200
+    - 400*
+    - 500
+success: Great, your answer is correct!
+failure: Try again.
+#>
+
+### A multiple choice quiz
+
+#< quiz "multi"
+question: Check all prime numbers
+mc:
+    - 2*
+    - 3*
+    - 4
+    - 5*
+    - 6
+    - 7*
+    - 8
+success: Great, all answers are correct!
+failure: Not all answers correct. Try again.
+#>
+
+
+### An open question
+
+#< quiz "music"
+question: Johann ???? Bach
+answer: Sebastian
+#>
+
+### An open question with a numeric answer
+
+#< quiz "pi"
+question: 2. State pi up to 2 digits
+answer: 3.14
+roundto: 0.01
+#>
+
+
+### A quiz consisting of several questions (and a single check button)
+
+#< quiz "parts"
+parts:
+  - question: 1. What is 20*20?
+    choices:
+        - 100
+        - 200
+        - 400*
+        - 500
+    multiple: FALSE
+    success: Great, your answer is correct!
+    failure: Try again.
+  - question: 2. State pi up to 2 digits
+    answer: 3.14
+    roundto: 0.01
+#>
+
+
+#< award "Quiz master"
+You solved the quiz!
+#>
+
+
+## Exercise 3 -- Table outputs
+
+The shiny based inteface of RTutor shows data.frames by default as html tables. This example illustrates how, you can adapt the settings of how data.frames are shown.
+
+Use default settings for printing data.frames, that may have been adapted in the call to `show.ps`.
+```{r "mychunk", optional=TRUE}
+#< task_notest
+T = 40
+data.frame(x=runif(T),y=runif(T)*100000)
+2*2
+#>
+```
+
+You can overwrite the default settings for specific chunks, by specifying chunk options.
+```{r "mychunk2", signif.digits=5, round.digits=3, table.max.rows=30, html.data.frame=FALSE, optional=TRUE}
+#< task_notest
+T = 40
+data.frame(x=runif(T),y=runif(T)*100000, z=runif(T))
+#>
+```
+
+
+## Exercise 4 --Leaflet
+
+Check to see an interactive leaflet centered on the Department of Mathematics and Economics at Ulm University. The place where RTutor has been created.
+```{r results='asis', output="htmlwidget", widget="leaflet"}
+#< task_notest
+SFmap <- leaflet() %>% 
+  addTiles() %>% 
+  setView(9.9620289,48.4251394, zoom = 11) %>% 
+  addMarkers(9.963614702355699,48.42517242865929, popup = 'RTutor was created here at Ulm University')
+SFmap
+#>
+```
+
+Here you can see what else you can do with the great leaflet packages:
+
+http://rstudio.github.io/leaflet/
+
+Here is a list of some other htmlwidgets, which now can also be used with RTutor:
+
+http://www.htmlwidgets.org/

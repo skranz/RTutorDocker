@@ -1,0 +1,642 @@
+#< ignore
+```{r "setup"}
+library(restorepoint)
+# facilitates error detection
+set.restore.point.options(display.restore.point=FALSE)
+
+library(RTutor)
+#library(restorepoint)
+setwd("D:/lehre/energieoekonomik/rtutor 2016/intro")
+ps.name = "Intro"; sol.file = paste0(ps.name,"_sol.Rmd")
+libs = c() # character vector of all packages you load in the problem set
+#name.rmd.chunks(sol.file) # set auto chunk names in this file
+
+create.ps(sol.file=sol.file,ps.name=ps.name, libs=libs, stop.when.finished=FALSE, add.enter.code.here=TRUE,rps.has.sol = FALSE)
+
+#show.ps(ps.name)
+
+stop.without.error()
+```
+#>
+
+# Problemset r_intro
+
+An interactive Problemset for RTutor that introduces to computing with vectors in R
+
+Author:  Sebastian Kranz
+Date:    12.03.2016
+License: GPL >= 2.0
+
+## Exercise 1 -- R as calculator
+
+a) Compute 123 + 257 by typing it below as R code. To run the code in your R console, go to the line with your text cursor and press Ctrl-Enter.
+
+```{r }
+123+257
+#< hint
+cat("'Just type 123+257 where the R code shall be entered in part a).")
+#>
+```
+
+Now check your solution, via Addins -> Check Problemset
+
+Also try to type in a wrong solution above to see RTutors output. 
+
+
+b) The command
+```{r }
+#< task
+x = 4
+#>
+```
+
+assigns the value 4 to the **variable** x.
+
+Assign the value 8 to the variable y
+
+```{r }
+y = 8
+#< hint
+cat("Come on, you see above that x = 4 assigns the value 4 to the variable x. Do you have no idea how you could assign the value 8 to the variable y?")
+#>
+```
+
+Again check your solution. Do this in all the following chunks.
+
+
+c) We can now calculate with these variables. Compute the product of x and y
+
+```{r }
+x*y
+#< test_arg
+ok.if.same.val = TRUE
+#>
+#< hint
+cat("a+b would show the sum of variables a and b.")
+#>
+```
+
+You can type `stats()` in the R console anytime to see your progress on the problem set.
+
+d) Compute the square root of 123456789, assign it to a variable r and show r.
+
+```{r "1 d", optional=TRUE}
+r = sqrt(123456789)
+#< hint
+cat("If you want to know how to do something in R, e.g. computing a square root, you can always use Google. E.g. search for 'R square root'")
+#>
+r
+```
+
+#< award "CalculatoR"
+Yep, you used R as a pocket calculator!
+#>
+
+If you correctly finished the exercise above you earned an award. There is no extrinsic benefit of awards, but experience from video game design suggests that awards might still be motivating. You can see all your awards by typing `awards()` in the R console.
+
+
+## Exercise 2 -- Calculating with vectors
+
+a) A nice feature of R is that you can also directly calculate with vectors.
+The following command creates a vector of 3 numbers
+
+```{r }
+#< task
+c(4,2,73)  
+#>
+```
+
+
+b) Save in the variable u a vector of 4 different numbers
+
+```{r }
+u = c(3,6,7,99)  
+#< test
+check.variable("u",c(3,6,7,99),length=TRUE, class=TRUE, values=FALSE)
+#>
+```
+
+c) Enter the command 3*u
+
+```{r }
+3*u
+#< test_arg
+ok.if.same.val = TRUE
+#>
+```
+
+The command simply multiples each element of u by 3.
+
+Remember: you can type anytime the command `stats()` in your R console to see how much you have already solved, and how many hints you have looked at. Try it out.
+
+d) Add 100 to each element of u
+
+```{r }
+100+u
+#< test_arg
+ok.if.same.val = TRUE
+#>
+```
+
+Remember: Make sure to save (Strg-S) and check  (Strg-Alt-R) your problem set after each code chunk.
+
+e) Generate another vector v of 4 different numbers and compute the sum of u and v
+
+```{r }
+v = 1:4
+#< test
+check.variable("v",1:4, length=TRUE, class=TRUE, value=FALSE)
+#>
+u+v
+#< test_arg
+ok.if.same.val = TRUE
+#>
+```
+
+f) Find out what the command u*v computes. Is it the scalar product of u and v, the outer product or the element-wise product?
+
+```{r }
+#< task
+# Write down as answer "scalar product", "outer product", or "element-wise product"
+#>
+"element-wise product"
+
+
+```
+
+#< award "Vector-CalculatoR"
+R allows computation with vectors almost as easily as computation with scalars.
+
+For those who know other programming languages: In R, applying functions or mathematical operations directly on vectors (or matrices) is typically much, much faster than looping through each element with a for or while loop.
+#>
+
+## Exercise 3 -- Combining vectors
+
+a) Consider the following commands that generate vectors
+
+```{r }
+#< task
+x = 2:4
+x
+c(x, 10:13)
+seq(5,7,by=0.5)
+#>
+```
+
+By looking at the resulting vectors can you guess what the commands a:b, c and seq do? You can also use the R-help by pressing F1 when your text-input cursor is on the command name. 
+
+b) Using : create a vector that contains all integer numbers between 10 und 20, i.e. 10, 11, 12, ..., 19, 20.
+
+```{r }
+10:20
+```
+
+c) Let y be a vector that contains all numbers between 0 and 1 with step size 0.01, i.e. 0, 0.01, 0.02, ..., 0.99, 1. Then show y.
+
+```{r }
+y = seq(0,1,by=0.01) 
+y
+#< hint
+cat('Search in Google for "R generate a sequence of numbers" and check the shown mailing list answers or R help files for a command that can generate such sequences. Otherwise use the ?seq command to find out, what parameters you can set and what they do.')
+#>
+```
+
+d) Let 'b' be a variable that contains all integer numbers from 0 to 10 and from 50 to 60 but not the numbers inbetween. Show b.
+
+```{r }
+b = c(0:10, 50:60)  
+b
+```
+
+e) Let z be a variable that shows the first 100 square numbers, i.e. 1,4,9,... Then show z
+
+```{r }
+z = 1:100 * 1:100
+#< hint
+cat("There is a simple one-line formula to compute the 100 first square numbers. Just combine what you have learned in exercise 2 f) and in exercise 3 b).")
+#>
+z
+```
+#< award "V[e]ctory!"
+You don't have to work with single integers or doubles anymore. With this much power you will truly be v[e]ctorious!
+#>
+
+## Exercise 4 -- Summary functions
+
+a) We often want to compute some summary statistics of a vector. For example:
+
+```{r }
+#< task
+x = 10:20
+x
+# Compute the sum of x
+sum(x)
+#>
+```
+
+b) Compute the mean of x.
+
+```{r }
+mean(x)
+#< hint
+display("Search Google for something like 'R compute mean' to find the right function name.")
+#>
+```
+
+c) Compute the standard deviation of x.
+
+```{r }
+sd(x)
+#< hint
+display("Search Google for something like 'R compute standard deviation' to find the right function name.")
+#>
+```
+
+d) Find the maximum value of all elements in x.
+
+```{r }
+max(x)
+#< hint
+display("Search Google for something like 'R find maximum' to find the right function name.")
+#>
+```
+
+e) Find the minimum value of all elements in x.
+
+```{r }
+min(x)
+#< hint
+display("Search Google with 'R ...' to find the right function name.")
+#>
+```
+
+f) Find the index of the element with the maximum value of all elements in x.
+Note: There are several ways to find the index of the maximum element. Here you shall use a single function call.
+
+```{r }
+which.max(x)
+#< hint
+display("Search Google with 'R ...' to find the right function name. The function you shall use, has the structure 'which.???'")
+#>
+
+```
+
+
+
+#< award "Summarizer"
+Now you know basic summary functions and are able to get a quick view of the properties of a vector. 
+#>
+
+## Exercise 5 -- Indexing
+
+a) The following commands generate and show a vector x with some numbers
+
+```{r }
+#< task
+x = ((1:19)-10)^2
+x
+#>
+```
+
+We can simply show a plot of x by typing
+
+```{r }
+#< task
+plot(x)
+#>
+```
+
+b) If we want to access the 3rd element of x, we  type
+
+```{r }
+#< task
+x[3]
+#>
+```
+
+We can get a subvector of the elements 5,6,7 by typing
+
+```{r }
+#< task
+x[5:7]
+#>
+```
+
+c) Show the 9nth element of x
+
+```{r }
+x[9]
+```
+
+d) Save in the variable z the elements 15,16,17,18 of x and show z
+
+```{r }
+z = x[15:18]
+z
+```
+
+e) Store in y the elements 4,2,9 (in this order) of x and show y
+
+```{r }
+y = x[c(4,2,9)]
+#< hint
+cat('You can use any vector as index, e.g. x[c(3,2,1)] would yield the elements 3,2,1 of x.')
+#>
+y
+```
+
+## Exercise 6 -- Logical operations
+
+a) R has logical values TRUE or FALSE
+
+```{r }
+#< task_notest
+# Comparisons yield TRUE or FALSE
+5 > 3
+1 == 2 # == checks equality
+
+x = 10 # = assigns a value
+x < 3
+#>
+```
+
+The operator & is a logical AND. It returns TRUE if BOTH conditions are TRUE
+
+```{r }
+#< task
+5 > 3 & x==2 
+1+2 == 3 & 100 / 10 == x
+#>
+```
+
+The operator | is a logical OR. It returns TRUE if at least ONE of the two conditions is TRUE
+
+```{r }
+#< task
+5 > 3 | x==2 
+1+2 == 3 | 100 / 10 == x
+1+1 == 3 | 2+2 == 5
+#>
+```
+
+We can apply comparisons and logical operators also on vectors of the same length, which are then performed elementwise. We get a logical vector that contains TRUE and FALSE for each element of the vector
+
+```{r }
+#< task
+y= 10:20
+y > 15
+y %% 2 == 0 # is TRUE for those elements of y that are an even number
+#>
+```
+
+
+b) Return a logical vector that returns a TRUE for all elements of y that are <= 14.
+
+```{r }
+y <= 14
+#< test_arg
+ok.if.same.val = TRUE
+#>
+```
+
+c) Return a logical vector that returns a TRUE for all elements of y that are smaller equal 14 or bigger equal 18
+
+```{r }
+y <= 14 | y >= 18
+#< test_arg
+  ok.if.same.val = TRUE
+#>
+#< hint
+display("Use the logical OR | to combine conditions of the form y <= ??? and y >= ???")
+#>
+```
+
+d) Return a logical vector that returns a TRUE for all elements of y that are between 15 and 19 (including 15 and 19)
+
+```{r }
+y >= 15 & y <= 19
+#< test_arg
+  ok.if.same.val = TRUE
+#>
+#< hint
+display("Use the logical AND & to combine conditions of the form y >= ??? and y <= ???")
+#>
+```
+
+e) We can use logical vectors to index vectors. For example, to get all values of y that are strictly above 15, we can type
+
+```{r }
+#< task
+y[y>15]
+#>
+```
+
+f) Show all values of y that are strictly below 13
+
+```{r }
+y[y<13]
+```
+
+g) Show all values of y that are between or equal to 14 and 18,
+
+```{r }
+y[y>=14 & y <= 18]
+#< test_arg
+ok.if.same.val = TRUE
+#>
+```
+
+h) Note that we can also store a logical vector in a variable
+
+```{r }
+#< task_notest
+ind = (y >=18)
+ind
+y[ind]
+#>
+```
+
+the function which gets the index of all elements in which a logical vector is TRUE
+
+```{r }
+#< task_notest
+which(ind)
+#>
+```
+#< award "It's only logical"
+"You learned about the logical operators & (and) and | (or) and how you can use them to select rows from a vector."
+#>
+
+## Exercise 7 -- Lists
+
+Besides vectors we often encounter in R the following objects: list, data.frame and matrix. Let us briefly get used to lists here.
+
+a) A list is a very flexible container that can contain variables of different kinds, like numbers, characters, vectors or lists itself
+
+```{r }
+#< task
+x = list(a="Hi",b=1:3,c=list(y=3,z=4))
+x
+#>
+```
+
+The elements of list often have a name. We can access an element of the list by its name or index in several ways:
+
+```{r }
+#< task
+x[[1]]
+x[["a"]]
+x$a
+#>
+```
+
+b) Show the element b of x using the $ operator
+
+```{r }
+x$b
+```
+
+c) Show the element c of x using its index, i.e. 3, and the [[...]] notation
+
+```{r }
+x[[3]]
+```
+
+d) We can also simply add or change elements of an list
+
+```{r }
+#< task
+x$d = "New element" 
+x
+#>
+```
+
+e) Add to x the element "e" with the value 100
+
+```{r }
+x$e = 100
+```
+
+f) Note: if we index elements of a list with the [...] notation, we get a sublist which is itself a list.
+
+```{r }
+#< task_notest
+x[[1]] # yields the element a of x
+x[1] # yields a list with one element $a
+x[1:2] # yields a list with elements $a and $b
+#>
+```
+#< award "list-ener"
+You heard about lists...
+#>
+
+## Exercise 8 -- Data frames
+
+a) A data frame is a list whose elements are vectors of the same length. A data frame is the common way to store data in R. 
+
+```{r }
+#< task
+df = data.frame(a=5:7, b=4, c=c("A","B","C"), d = runif(3))
+df
+#>
+```
+
+Note that b is automatically changed to a column that has three rows with a 4.
+
+b) If we use the $ notation on a data.frame, we get the corresponding column. Show the column 'a' of df 
+
+```{r }
+df$a
+```
+
+c) If we want to get the element in the 2nd row in column a of df, we can have 4 different ways:
+
+```{r }
+#< task_notest
+# Subset data.frame like lists
+df$a[2]
+df[["a"]][2]
+
+# Subset data.frame like a matrix
+df[2,"a"]
+df[2,1]
+#>
+```
+
+d) Store in the variable x the rows 2 and 3 of column d in df and then show x
+
+```{r }
+x = df$d[2:3]
+x
+```
+
+We will learn much more about data frames in later problem sets.
+
+#< award "framing the data"
+R users simply love to put their data into frames.
+#>
+
+## Exercise 9 -- Matrices
+
+a) A matrix works for a user similar like a data frame, but all its columns must be the same type (usually numbers). Internally, a matrix is stored differently than a data frame and some sort of computations can be performed much quicker.
+
+```{r }
+# Generate a matrix with 3 rows and 2 columns
+#< task
+m = matrix(1:6,nrow=3,ncol=2)
+#>
+#< task_notest
+m
+#>
+```
+
+b) There are a lot of functions for matrices, e.g. taking the transpose
+
+```{r }
+#< task_notest
+t(m)
+#>
+```
+
+c) Similar as with vectors we can do a lot of element wise computations on matrices
+
+```{r }
+#< task_notest
+m * 3
+#>
+```
+
+d) Compute the sum of the matrix m and m
+
+```{r }
+m+m
+```
+
+e)
+
+```{r }
+#< task_notest
+m*m # elementwise multiplication
+t(m) %*% m # matrix multiplication
+#>
+```
+
+
+We will learn more about computing with matrices in later problem sets.
+
+#< award "Intro the matrix"
+Tired of only working with vectors? A matrix opens up a whole new dimension for you!
+#>
+
+
+## Submitting your solution
+
+To submit your problem set first check it via Addins -> "Check Problemset" and then run the following command in the R console:
+
+    make.submission()
+
+It checks again your whole problem set and generates a file of the form `problemsetname__username.sub` that contains your solution and log files.
+Now submit this file for the corresponding assignment on Moodle. 
+Please do not change the name of the file.
+
+** Make sure that you upload the .sub file to Moodle, not some file with another extension!**
