@@ -25,3 +25,13 @@ If you want to create your own problem sets, it makes sense to mount a directory
 docker run -entrypoint="/usr/bin/with-contenv bash" --name rtutor -d -p 9898:8787 -e ROOT=TRUE -e USER=rtutor -e PASSWORD=<YOUR_PASSWORD> -v <DIR_ON_HOST>:/home/rtutor/myps skranz/rtutor
 ```
 where you should replace `<DIR_ON_HOST>` with the directory on your host computer.
+
+To stop and remove the running container call
+```
+docker stop rtutor
+docker rm rtutor
+```
+To remove the image call
+```
+docker rmi skranz/rtutor
+```
